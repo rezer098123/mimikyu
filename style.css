@@ -1,0 +1,1319 @@
+/* Base + theme variables */
+:root {
+  --primary: #0f9d58;
+  --muted: #f1f1f1;
+  --card: #ffffff;
+  --danger: #e74c3c;
+  --bg: #eef2f5;
+  --text: #0b1a1b;
+  --muted-text: #556574;
+  --accent: #34a853;
+}
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark theme */
+body.dark {
+  --bg: #0b1220;
+  --text: #e6eef6;
+  --muted-text: #9aa7b4;
+  --card: #0f1720;
+}
+
+
+/* Header */
+.app-header {
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  color: #fff;
+  border-radius: 8px 8px 0 0;
+}
+.header-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.header-left h1 {
+  margin: 0;
+  font-size: 18px;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Scrollable content area */
+.app-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  padding-bottom: 120px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.96));
+}
+body.dark .app-content {
+  background: linear-gradient(180deg, rgba(8, 12, 18, 0.6), rgba(8, 12, 18, 0.96));
+}
+
+/* Panels */
+.auth-panel {
+  background: var(--card);
+  padding: 14px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.06);
+  margin-bottom: 12px;
+}
+.auth-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Inputs */
+input, textarea, select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  box-sizing: border-box;
+  font-size: 15px;
+  color: var(--text);
+  background: #fff;
+}
+body.dark input, 
+body.dark textarea, 
+body.dark select {
+  background: #07101a;
+  border-color: #1f2b34;
+  color: var(--text);
+}
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(15, 157, 88, 0.12);
+  border-color: var(--primary);
+}
+
+/* Links */
+.link-like {
+  color: var(--primary);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Buttons */
+.cta-button {
+  background: linear-gradient(45deg, var(--primary), var(--accent));
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(15, 157, 88, 0.12);
+}
+.cta-button.outline {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: var(--text);
+  box-shadow: none;
+}
+/* 🔹 Small button variant */
+.cta-button.small {
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+
+/* Blocks & controls */
+.app-block {
+  margin-bottom: 18px;
+}
+.segment-control {
+  display: flex;
+  gap: 8px;
+  background: #f7fafc;
+  padding: 6px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+.home-tab-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 700;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+.home-tab-btn.small {
+  padding:8px;
+}
+.home-tab-btn.active {
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(15, 157, 88, 0.06);
+  color: var(--primary);
+}
+
+/* Cards */
+.list-wrapper {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.product-card, .orders-card, .delivery-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border-radius: 12px;
+  padding: 12px;
+  background: var(--card);
+  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+.product-card img {
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.product-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.badge {
+  padding: 6px 8px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 13px;
+}
+.badge.stock {
+  background: #fff3cd;
+  color: #856404;
+}
+.badge.price {
+  background: #e8f6ee;
+  color: #0f9d58;
+}
+
+/* 🔥 Stock countdown timer */
+.stock-timer {
+  font-weight: 700;
+  font-size: 13px;
+  display: inline-block;
+  margin-top: 4px;
+}
+.stock-timer.green {
+  color: #28a745;
+}
+.stock-timer.red {
+  color: #dc3545;
+}
+
+/* Empty states */
+.empty-state {
+  text-align: center;
+  color: var(--muted-text);
+  padding: 12px;
+  font-weight: 600;
+}
+
+/* Tabs */
+.tab-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+.tab-btn {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 700;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.tab-btn.active {
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(15, 157, 88, 0.08);
+  color: var(--primary);
+}
+
+
+/* Status labels */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 13px;
+}
+.status.pending { background: #fff3cd; color: #856404; }
+.status.onprocess { background: #d1ecf1; color: #0c5460; }
+.status.ondelivery { background: #fef4e6; color: #b35c00; }
+.status.success { background: #d4edda; color: #155724; }
+.status.failed { background: #f8d7da; color: #721c24; }
+.status.declined { background: #e2e3e5; color: #6c757d; }
+.status.canceled { background: #f8d7da; color: #7a3b3b; }
+
+/* Bottom nav */
+.bottom-nav {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  height: 76px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98));
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 8px;
+  box-shadow: 0 14px 40px rgba(2,6,23,0.12);
+  z-index: 80;
+}
+body.dark .bottom-nav {
+  background: linear-gradient(180deg, rgba(20,28,36,0.9), rgba(20,28,36,0.95));
+}
+.bottom-nav .nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  background: transparent;
+  color: var(--muted-text);
+  font-size: 13px;
+  cursor: pointer;
+  width: 84px;
+}
+.bottom-nav .nav-btn i {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+.bottom-nav .nav-btn.active {
+  color: var(--primary);
+  transform: translateY(-4px);
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* ensure it overlays app but below content */
+  pointer-events: none; /* prevent blocking clicks when hidden */
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.modal.show {
+  opacity: 1;
+  pointer-events: auto; /* enable clicks when shown */
+}
+
+.modal.hidden {
+  display: none;
+}
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 400px;
+  width: 90%;
+  z-index: 1000;
+  pointer-events: auto; /* ✅ make buttons clickable */
+}
+.modal .modal-content {
+  background: var(--bg, #fff);
+  color: var(--text, #000);
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  transform: translateY(-20px);
+}
+.modal-content.show {
+  transform: scale(1);
+  opacity: 1;
+}
+@keyframes modalPop {
+  from { transform: scale(0.96) translateY(10px); opacity: 0; }
+  to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+.modal.show .modal-content {
+  animation: modalPop 0.25s ease forwards;
+}
+.modal-body {
+  margin-top: 8px;
+}
+/* 🔹 Modal actions */
+.modal .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Timeline styles */
+.status-timeline {
+  margin-top: 6px;
+  padding-left: 10px;
+  border-left: 2px solid #ddd;
+  font-size: 12px;
+  color: var(--muted-text);
+}
+#timelineModal .modal-content {
+  max-width: 500px;
+  background: var(--bg, #fff);
+  color: var(--text, #000);
+  border-radius: 12px;
+  padding: 20px;
+}
+.status-timeline p {
+  margin: 5px 0;
+  font-size: 0.9em;
+}
+
+/* Chat UI */
+.chat-window {
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid #e6eef0;
+  border-radius: 10px;
+  padding: 8px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.chat-item {
+  max-width: 78%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f1f5f9;
+  align-self: flex-start;
+}
+.chat-item.self {
+  background: #d1f7e0;
+  align-self: flex-end;
+}
+body.dark .chat-item {
+  background: #08151e;
+  color: var(--text);
+}
+.chat-input {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+}
+
+/* Rating stars */
+.stars button {
+  font-size: 22px;
+  background: transparent;
+  border: none;
+  margin-right: 6px;
+  cursor: pointer;
+}
+.stars button.active {
+  color: #ffb347;
+}
+
+/* Utility */
+.hidden { display: none !important; }
+.fade { opacity: 0; transform: translateY(20px); transition: opacity .25s ease, transform .25s ease; }
+.fade.show { opacity: 1; transform: translateY(0); }
+@keyframes small-pop { from { transform: scale(.98); } to { transform: scale(1); } }
+
+/* Admin action buttons */
+.admin-approve, .admin-decline, .admin-success, .admin-fail, .admin-block {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 13px;
+  min-width: 80px;
+  transition: transform 0.12s ease, opacity 0.12s;
+}
+.admin-approve { background: #28a745; color: #fff; }
+.admin-approve:hover { transform: translateY(-2px); opacity: 0.9; }
+.admin-decline { background: #dc3545; color: #fff; }
+.admin-decline:hover { transform: translateY(-2px); opacity: 0.9; }
+.admin-success { background: #007bff; color: #fff; }
+.admin-success:hover { transform: translateY(-2px); opacity: 0.9; }
+.admin-fail { background: #fd7e14; color: #fff; }
+.admin-fail:hover { transform: translateY(-2px); opacity: 0.9; }
+.admin-block { background: #6c757d; color: #fff; }
+
+/* Icon-only admin buttons */
+.card-actions {
+  display: flex;
+  gap: 6px;
+}
+.card-actions button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 14px;
+}
+.admin-approve i, .admin-decline i {
+  pointer-events: none;
+}
+
+/* Cart tab visual cards */
+.cart-tabs-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* spacing between rows */
+  margin: 8px 0 12px 0;
+}
+.cart-tabs-visual .tab-row {
+  display: flex;
+  gap: 6px;
+}
+.cart-tabs-visual .tab-row .tab-card {
+  flex: 1;
+}
+.tab-card {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 10px 8px;
+  box-shadow: 0 6px 16px rgba(2,6,23,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.tab-card.active {
+  border: 2px solid var(--primary);
+}
+.tab-card .tab-card-icon {
+  font-size: 16px;
+  margin-right: 4px;
+  color: var(--primary);
+}
+.tab-card .tab-card-title {
+  flex: 1;
+  font-weight: 600;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.tab-card .tab-card-count {
+  background: #fff3cd;
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 12px;
+  color: #000 !important;
+}
+.admin-card .tab-card-icon { background: #eef7ff; }
+
+/* Cart orders */
+.orders-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px; /* spacing between lines */
+}
+
+.orders-card small {
+  display: inline-block;
+  max-width: 90%;
+}
+
+/* 🔥 Activity Feed - upgraded scrollable style */
+.activity-feed {
+  max-height: 100px;
+  overflow-y: auto;
+  margin-bottom: 13px;
+  padding: 6px;
+  border: 1px solid #e6eef0;
+  border-radius: 8px;
+  background: var(--card);
+}
+.activity-feed ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.activity-feed li {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 20px;
+  padding: 2px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Dynamic scroll ticker */
+@keyframes scrollTicker {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* On-Progress List styling */
+#onProgressList {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.round-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;   /* makes it perfectly round */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: #3498db;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  font-size: 16px;
+}
+.round-btn:hover {
+  background: #2980b9;
+}
+.round-btn i {
+  pointer-events: none;
+}
+
+/* Admin tab grid */
+#adminAccountTabs.grid-2rows {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+/* Timeline step visuals */
+.timeline-step {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  animation: fadeInStep 0.3s ease;
+}
+body.dark .timeline-step {
+  background: rgba(20, 28, 36, 0.8);
+}
+@keyframes fadeInStep {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.round-btn.copy-id {
+  background: #f4f4f4;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+.round-btn.copy-id:hover {
+  background: #dcdcdc;
+  transform: scale(1.1);
+}
+body.dark .round-btn.copy-id {
+  background: #2a2a2a;
+  color: #eee;
+}
+body.dark .round-btn.copy-id:hover {
+  background: #3a3a3a;
+}
+/* 🔹 Enhanced Logout Button */
+.logout-btn {
+  background: linear-gradient(45deg, #e74c3c, #c0392b); /* red gradient */
+  color: #fff !important;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 14px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 16px rgba(231, 76, 60, 0.3);
+}
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(192, 57, 43, 0.4);
+}
+.logout-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px rgba(192, 57, 43, 0.5);
+}
+
+/* === Activity Feed Auto-scroll Styling === */
+#activityList {
+  position: relative;
+  height: 180px; /* or any size that fits your layout */
+  overflow: hidden;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+#activityList li {
+  padding: 6px 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  font-size: 14px;
+  color: var(--text);
+  background: var(--card);
+}
+
+/* Fading overlay top and bottom */
+#activityList::before,
+#activityList::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#activityList::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--bg) 60%, transparent);
+}
+
+#activityList::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--bg) 60%, transparent);
+}
+#activityList .activity-item {
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--card);
+  transition: background 0.3s ease;
+}
+
+#activityList .activity-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* ===== Admin Panel 5 Rows Layout ===== */
+#adminAccountTabs {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+#adminAccountTabs .tab-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#adminAccountTabs .tab-row .tab-card {
+  flex: 1;
+  background: var(--card);
+  border-radius: 15px;
+  padding: 8px 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#adminAccountTabs .tab-row .tab-card.active {
+  background: transparent;           
+  border: 2px solid var(--primary);   
+  color: var(--primary);             
+  transform: translateY(-3px);
+  box-shadow: 0 0 6px rgba(15, 157, 88, 0.2);
+}
+
+
+#adminAccountTabs .tab-row .tab-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(15, 157, 88, 0.15);
+}
+
+/* Icons & Titles */
+#adminAccountTabs .tab-card-icon {
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+#adminAccountTabs .tab-card-title {
+  font-weight: 650;
+  text-align: center;
+  font-size: 15px;
+}
+
+/* Responsive stacking for smaller screens */
+@media (max-width: 480px) {
+  #adminAccountTabs .tab-row {
+    flex-direction: column;
+  }
+}
+/* ===== Apply Page ===== */
+#applyContent textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--muted-text);
+  margin-top: 10px;
+  min-height: 80px;
+  resize: none;
+}
+#applyContent .cta-button {
+  margin-top: 10px;
+  width: 100%;
+}
+#driverCheckPanel {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+.delivery-card {
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 8px;
+  background: var(--card-bg, #1e1e1e);
+}
+/* === ACTIVITY LOG ITEMS (No fade animation) === */
+.activity-log-item {
+  background: var(--card);
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 14px;
+  border-left: 4px solid #4caf50;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out, transform 0.2s ease;
+}
+
+.activity-log-list {
+  padding: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: var(--card);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  scroll-behavior: smooth;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.activity-log-item:hover {
+  background: rgba(76, 175, 80, 0.1);
+  transform: scale(1.01);
+}
+
+/* Theme adaptive colors */
+body.dark .activity-log-list {
+  background: #0f1720;
+}
+body.dark .activity-log-item {
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+/* === CART TAB STYLES (Border-based design) === */
+.tab-card.user-card {
+  background: transparent;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  color: var(--muted-text);
+}
+
+
+.tab-card.user-card:hover {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.tab-card.user-card.active {
+  border: 2px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+  box-shadow: 0 0 6px rgba(15, 157, 88, 0.2);
+}
+
+/* === ADMIN TAB STYLES (Imitate Cart Nav Tabs) === */
+.tab-card.admin-card {
+  background: transparent;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  color: var(--muted-text);
+}
+
+.tab-card.admin-card:hover {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+
+/* === 🔴 Animated Admin Notification Dots === */
+.dot {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  background: #ff3b30;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 50%;
+  padding: 2px 6px;
+  min-width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 6px rgba(255, 59, 48, 0.6);
+  animation: pulse 1.8s infinite;
+}
+
+/* ✅ Smooth glowing pulse */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 6px rgba(255, 59, 48, 0.6);
+  }
+  50% {
+    transform: scale(1.2);
+    box-shadow: 0 0 12px rgba(255, 59, 48, 0.8);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 6px rgba(255, 59, 48, 0.6);
+  }
+}
+
+.tab-card-icon {
+  position: relative;
+}
+
+.dot.pulse {
+  animation: pulse 1.8s infinite;
+}
+
+/* 🔒 Universal hide class — prevents flicker or overrides */
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+}
+
+/* === Apply Page Split Layout (no tabs) === */
+.dual-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.dual-column {
+  flex: 1 1 48%;
+  background: var(--card);
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .dual-container {
+    flex-direction: column;
+  }
+  .dual-column {
+    width: 100%;
+  }
+}
+
+
+/* 🔴 Number bubble */
+#pendingBadgeCount {
+  background: #e74c3c;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 50%;
+  min-width: 22px;
+  height: 22px;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: badgePulse 2s infinite;
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.5);
+}
+
+/* 🔥 Smooth glowing pulse animation */
+@keyframes badgePulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 6px rgba(231, 76, 60, 0.5);
+  }
+  50% {
+    transform: scale(1.2);
+    box-shadow: 0 0 16px rgba(231, 76, 60, 0.8);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 6px rgba(231, 76, 60, 0.5);
+  }
+}
+
+.admin-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.18);
+  padding: 8px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 200; /* ensures it's never hidden behind anything */
+}
+.admin-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255,255,255,0.25);
+}
+.admin-badge i {
+  font-size: 18px;
+  color: #fff;
+}
+.toast-message {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #222;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  z-index: 9999;
+  animation: fadeInOut 3.5s ease-in-out forwards;
+}
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(10px); }
+  10%, 90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(10px); }
+}
+.status-timeline p {
+  padding: 8px;
+  border-left: 3px solid #4CAF50;
+  margin: 6px 0;
+  background: #f9f9f9;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.4em;
+}
+/* 🟢 Brighter delivery cards for drivers */
+.delivery-card {
+  background: #fff !important;
+  color: #0b1a1b;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.06);
+}
+body.dark .delivery-card {
+  background: #fefefe !important; /* brighter in dark mode */
+  color: #0b1a1b;
+}
+.light-card {
+  background: #f9f9f9;
+  color: #222;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+.tab-card.admin-card.active {
+  border: 2px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+  box-shadow: 0 0 6px rgba(15, 157, 88, 0.2);
+}
+/* 🕒 Expiry timer display */
+.stock-timer {
+  font-weight: 600;
+  margin-top: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.stock-timer.green {
+  color: #0f9d58;
+}
+
+.stock-timer.red {
+  color: #e74c3c;
+}
+/* =====================================================
+   Admin Action Icon Buttons (Check / X)
+===================================================== */
+.card-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.admin-approve,
+.admin-decline {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.admin-approve {
+  background: #28a745;
+  color: #fff;
+}
+.admin-approve:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.admin-decline {
+  background: #dc3545;
+  color: #fff;
+}
+.admin-decline:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+/* ==========================================================
+   🧾 ADMIN APPROVE / DECLINE BUTTONS (Pending Deliveries)
+   ========================================================== */
+.round-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  margin: 0 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* ✅ Approve (Green) */
+.round-btn.admin-approve {
+  background-color: var(--primary, #2ecc71);
+  color: #fff;
+}
+.round-btn.admin-approve:hover {
+  background-color: #27ae60;
+  transform: scale(1.05);
+}
+
+/* ❌ Decline (Red) */
+.round-btn.admin-decline {
+  background-color: var(--danger, #e74c3c);
+  color: #fff;
+}
+.round-btn.admin-decline:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+/* 💨 Click animation */
+.round-btn:active {
+  transform: scale(0.9);
+  opacity: 0.9;
+}
+
+/* 🧱 Button alignment container */
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+/* 📦 Delivery card consistency */
+.delivery-card.light-card {
+  background: var(--card, #fff);
+  border-radius: 16px;
+  padding: 15px 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+}
+.delivery-card.light-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.fade-out {
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
+#recentActivitiesList {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 8px;
+  scroll-behavior: smooth;
+}
+
+.activity-item {
+  background: var(--card, #fff);
+  border-radius: 12px;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+}
+
+.activity-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.activity-entry p {
+  margin: 0;
+  color: var(--text, #222);
+}
+
+.activity-time {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted-text, #888);
+  margin-top: 4px;
+}
+.activity-group {
+  margin-bottom: 1.5em;
+}
+
+.activity-date {
+  font-size: 1rem;
+  color: #34a853;
+  margin-bottom: 0.5em;
+  border-left: 4px solid #34a853;
+  padding-left: 8px;
+}
+
+.activity-item {
+  background: var(--card, #fff);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: 0.2s ease;
+}
+
+.activity-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.remove-btn {
+  margin-top: 8px;
+  background: #dc3545;
+  color: #fff;
+}
+.remove-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+/* Hide any accidental top-right Remove buttons inside product cards */
+.product-card > button.remove-btn,
+.product-card .card-actions .remove-btn {
+  display: none !important;
+}

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ABOTKAMAY 🔰</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <!-- SweetAlert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+<body>
+  <div class="phone-frame">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-row">
+        <div class="header-left">
+          <h1>ABOTKAMAY</h1>
+          <small class="tagline">Local produce, trusted hands</small>
+        </div>
+        <div class="header-right">
+          <div id="adminBadge" class="admin-badge hidden" title="Pending accounts">
+            <i class="fas fa-user-clock"></i>
+            <span id="pendingBadgeCount">0</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- AUTH SECTION -->
+    <main id="authSection" class="app-content">
+      <div id="loginForm" class="auth-box auth-panel">
+        <h2>Login</h2>
+        <input type="email" id="loginEmail" placeholder="Email" />
+        <input type="password" id="loginPassword" placeholder="Password" />
+        <button id="loginBtn" class="cta-button">Log In</button>
+        <p>Don’t have an account? <span id="showSignup" class="link-like">Register</span></p>
+      </div>
+
+      <div id="signupForm" class="auth-box auth-panel hidden">
+        <h2>Register</h2>
+        <input type="text" id="signupName" placeholder="Full Name" />
+        <input type="email" id="signupEmail" placeholder="Email" />
+        <input type="password" id="signupPassword" placeholder="Password" />
+        <input type="text" id="signupPhone" placeholder="Phone Number" />
+        <input type="text" id="signupAddress" placeholder="Address" />
+        <textarea id="signupReason" placeholder="Why should we approve your account?"></textarea>
+        <select id="signupRole">
+          <option value="customer">Customer</option>
+          <option value="driver">Driver</option>
+        </select>
+        <button id="signupBtn" class="cta-button">Register</button>
+        <p>Already have an account? <span id="showLogin" class="link-like">Login</span></p>
+      </div>
+    </main>
+
+    <!-- MAIN APP SECTION -->
+    <section id="mainApp" class="hidden app-content fade">
+      <!-- HOME SECTION -->
+      <div id="homeContent" class="app-block">
+        <div class="segment-control">
+          <button id="tabBuyBtn" class="home-tab-btn active" data-tab="homeBuy">
+            <i class="fas fa-shopping-bag"></i><span>Buy</span>
+          </button>
+          <button id="tabSellBtn" class="home-tab-btn" data-tab="homeSell">
+            <i class="fas fa-seedling"></i><span>Sell</span>
+          </button>
+          <button id="tabDeliverBtn" class="home-tab-btn" data-tab="homeDeliver">
+            <i class="fas fa-truck"></i><span>Deliver</span>
+          </button>
+        </div>
+
+        <div id="activityFeed" class="activity-feed auth-panel scrollable-feed">
+          <ul id="activityList" class="activity-list"></ul>
+        </div>
+
+        <div id="homeBuy" class="home-section">
+          <h2>Buy Products</h2>
+          <div id="homeBuyList" class="list-wrapper"></div>
+          <div id="homeBuyEmpty" class="empty-state hidden">No available items to buy at the moment.</div>
+        </div>
+
+        <div id="homeSell" class="home-section hidden">
+          <h2>Sell Product</h2>
+          <div class="sell-form auth-panel">
+            <input type="text" id="sellProduct" placeholder="Product Name" />
+            <input type="number" id="sellQty" placeholder="Quantity (KG)" />
+            <input type="number" id="sellPrice" placeholder="Price per KG" />
+            <button id="sellBtn" class="cta-button">Register Stock</button>
+          </div>
+          <div id="homeSellList" class="list-wrapper"></div>
+          <div id="homeSellEmpty" class="empty-state hidden">You haven't listed any products yet.</div>
+        </div>
+
+        <div id="homeDeliver" class="home-section hidden driver-only">
+          <h2>Delivery Management</h2>
+          <div class="auth-panel driver-controls">
+            <button id="driverCheckInBtn" class="cta-button small">Check In</button>
+            <button id="driverCheckOutBtn" class="cta-button outline small">Check Out</button>
+          </div>
+          <div id="homeDeliverList" class="list-wrapper"></div>
+          <div id="homeDeliverEmpty" class="empty-state hidden">No delivery assignments yet.</div>
+        </div>
+      </div>
+
+      <!-- CART SECTION -->
+      <div id="cartContent" class="app-block hidden">
+        <h2>My Cart</h2>
+        <div class="cart-tabs-visual">
+          <div class="tab-row">
+            <div class="tab-card user-card active" data-tab="ordersTab">
+              <div class="tab-card-icon"><i class="fas fa-list"></i></div>
+              <div class="tab-card-title">Orders</div>
+              <div class="tab-card-count" id="ordersCount">0</div>
+            </div>
+            <div class="tab-card user-card" data-tab="deliveriesTab">
+              <div class="tab-card-icon"><i class="fas fa-truck"></i></div>
+              <div class="tab-card-title">Deliveries</div>
+              <div class="tab-card-count" id="deliveriesCount">0</div>
+            </div>
+            <div class="tab-card user-card" data-tab="historyTab">
+              <div class="tab-card-icon"><i class="fas fa-history"></i></div>
+              <div class="tab-card-title">History</div>
+              <div class="tab-card-count" id="historyCount">0</div>
+            </div>
+          </div>
+        </div>
+        <div id="ordersTab" class="tab-content active"><div id="ordersList"></div></div>
+        <div id="deliveriesTab" class="tab-content"><div id="deliveriesList"></div></div>
+        <div id="historyTab" class="tab-content"><div id="historyList"></div></div>
+      </div>
+
+      <!-- PROFILE SECTION -->
+      <div id="profileContent" class="app-block hidden">
+        <h2>Profile Info</h2>
+        <div id="profileView" class="profile-view auth-panel">
+          <p><strong>Name:</strong> <span id="profileNameDisplay"></span></p>
+          <p><strong>Email:</strong> <span id="profileEmailDisplay"></span></p>
+          <p><strong>Phone:</strong> <span id="profilePhoneDisplay"></span></p>
+          <p><strong>Address:</strong> <span id="profileAddressDisplay"></span></p>
+          <p><strong>Role:</strong> <span id="profileRoleDisplay"></span></p>
+          <p><strong>Credit Score:</strong> <span id="profileCreditScoreDisplay">100</span></p>
+        </div>
+        <div class="profile-actions">
+          <button id="logoutBtn" class="cta-button logout-btn">Logout</button>
+        </div>
+      </div>
+
+      <!-- ADMIN PANEL -->
+      <div id="adminContent" class="app-block hidden admin-only">
+        <h2>Admin Panel</h2>
+<div id="adminAccountTabs" class="cart-tabs-visual">
+  <div class="tab-row">
+    <div class="tab-card admin-card active" data-tab="pendingAccountsTab">
+      <div class="tab-card-icon">
+        <i class="fas fa-hourglass-half"></i>
+        <span class="dot hidden" id="dot-pending"></span>
+      </div>
+      <div class="tab-card-title">Pending</div>
+    </div>
+
+    <div class="tab-card admin-card" data-tab="approvedAccountsTab">
+      <div class="tab-card-icon">
+        <i class="fas fa-user-check"></i>
+        <span class="dot hidden" id="dot-approved"></span>
+      </div>
+      <div class="tab-card-title">Approved</div>
+    </div>
+
+    <div class="tab-card admin-card" data-tab="blacklistAccountsTab">
+      <div class="tab-card-icon">
+        <i class="fas fa-user-slash"></i>
+        <span class="dot hidden" id="dot-blacklist"></span>
+      </div>
+      <div class="tab-card-title">Blacklisted</div>
+    </div>
+  </div>
+
+  <div class="tab-row">
+    <div class="tab-card admin-card" data-tab="reportsTab">
+      <div class="tab-card-icon">
+        <i class="fas fa-flag"></i>
+        <span class="dot hidden" id="dot-reports"></span>
+      </div>
+      <div class="tab-card-title">Reports</div>
+    </div>
+
+    <div class="tab-card admin-card" data-tab="applicationsTab">
+      <div class="tab-card-icon">
+        <i class="fas fa-clipboard-check"></i>
+        <span class="dot hidden" id="dot-applications"></span>
+      </div>
+      <div class="tab-card-title">Applications</div>
+    </div>
+
+    <div class="tab-card admin-card" data-tab="pendingStockTab">
+      <div class="tab-card-icon">
+        <i class="fas fa-boxes"></i>
+        <span class="dot hidden" id="dot-stock"></span>
+      </div>
+      <div class="tab-card-title">Pending Stock</div>
+    </div>
+  </div>
+
+  <div class="tab-row">
+    <div class="tab-card admin-card" data-tab="pendingDeliveriesTab">
+      <div class="tab-card-icon">
+        <i class="fas fa-truck"></i>
+        <span class="dot hidden" id="dot-delivery"></span>
+      </div>
+      <div class="tab-card-title">Pending Deliveries</div>
+    </div>
+
+    <div class="tab-card admin-card" data-tab="onProcessTab">
+      <div class="tab-card-icon">
+        <i class="fas fa-spinner"></i>
+        <span class="dot hidden" id="dot-process"></span>
+      </div>
+      <div class="tab-card-title">On-Process</div>
+    </div>
+
+    <div class="tab-card admin-card" data-tab="transactionsTab">
+      <div class="tab-card-icon">
+        <i class="fas fa-archive"></i>
+        <span class="dot hidden" id="dot-transactions"></span>
+      </div>
+      <div class="tab-card-title">Transactions</div>
+    </div>
+  </div>
+</div>
+
+
+
+        <div id="pendingAccountsTab" class="tab-content active"><div id="pendingList"></div></div>
+        <div id="approvedAccountsTab" class="tab-content"><div id="approvedList"></div></div>
+        <div id="blacklistAccountsTab" class="tab-content"><div id="blackList"></div></div>
+        <div id="reportsTab" class="tab-content"><div id="reportsList"></div></div>
+        <div id="applicationsTab" class="tab-content"><div id="applicationsList"></div></div>
+        <div id="pendingStockTab" class="tab-content"><div id="pendingAdminList"></div></div>
+        <div id="pendingDeliveriesTab" class="tab-content"><div id="pendingDeliveriesList"></div></div>
+        <div id="onProcessTab" class="tab-content"><div id="onProcessAdminList"></div></div>
+        <div id="transactionsTab" class="tab-content"><div id="adminHistoryList"></div></div>
+      </div>
+
+<!-- ✅ APPLY PAGE (no tabs, always visible side-by-side) -->
+<div id="applyContent" class="app-page hidden">
+  <div class="app-content">
+    <h2>Wholesaler Application</h2>
+
+    <div class="dual-container">
+      <!-- 📝 Application Form -->
+      <div id="applyFormTab" class="dual-column">
+        <div class="auth-panel">
+          <div class="auth-box">
+            <label for="applyName">Full Name</label>
+            <input type="text" id="applyName" readonly />
+
+            <label for="applyReason">Reason / Business Info</label>
+            <textarea id="applyReason"
+              placeholder="Why do you want to become a wholesaler (can buy and sell products)?"></textarea>
+
+            <button id="applySubmitBtn" class="cta-button w-full">Submit Application</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 📬 Application Inbox -->
+      <div id="inboxTab" class="dual-column">
+        <h3>Application Status</h3>
+        <div id="inboxList" class="list-wrapper">
+          <div class="empty-state">Loading your application status...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      <!-- CHECKOUT MODAL -->
+      <div id="checkoutModal" class="modal hidden">
+        <div class="modal-content">
+          <h3>Checkout</h3>
+          <div id="checkoutProductInfo"></div>
+          <div class="modal-body">
+            <label for="checkoutQty">Quantity (KG)</label>
+            <input type="number" id="checkoutQty" placeholder="Enter quantity" />
+
+            <div id="checkoutDestinationWrap">
+              <label for="checkoutDestination">Delivery Destination</label>
+              <input type="text" id="checkoutDestination" placeholder="Enter delivery address" />
+            </div>
+<label for="checkoutMethod">Payment Method</label>
+<input type="text" id="checkoutMethod" value="Cash on Delivery" readonly style="background:#f5f5f5; color:#444; font-weight:600;">
+<input type="hidden" id="checkoutMethodValue" value="cod">
+<small style="display:block; margin-top:4px; color:gray;">Payment is fixed to Cash on Delivery.</small>
+
+          </div>
+          <div class="modal-actions">
+            <button id="cancelCheckoutBtn" class="cta-button outline">Cancel</button>
+            <button id="confirmCheckoutBtn" class="cta-button">Confirm</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIMELINE MODAL -->
+      <div id="timelineModal" class="modal hidden">
+        <div class="modal-content">
+          <h3>Transaction Timeline</h3>
+          <div id="timelineBody" class="status-timeline"></div>
+          <div class="modal-actions">
+            <button id="closeTimelineBtn" class="cta-button outline">Close</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav id="bottomNav" class="bottom-nav fade hidden">
+      <button class="nav-btn active" data-page="homeContent">
+        <i class="fas fa-home"></i><span>Home</span>
+      </button>
+      <button id="cartNav" class="nav-btn" data-page="cartContent">
+        <i class="fas fa-shopping-cart"></i><span>Cart</span>
+      </button>
+      <button class="nav-btn" data-page="profileContent">
+        <i class="fas fa-user"></i><span>Profile</span>
+      </button>
+      <button id="applyNav" class="nav-btn hidden" data-page="applyContent">
+        <i class="fas fa-clipboard"></i><span>Apply</span>
+      </button>
+      <!-- ADMIN NAV BUTTON -->
+      <button id="adminNav" class="nav-btn admin-only hidden" data-page="adminContent">
+        <i class="fas fa-tools"></i><span>Admin</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
