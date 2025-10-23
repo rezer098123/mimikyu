@@ -297,24 +297,28 @@ input:focus, textarea:focus, select:focus {
 .status.declined { background: #e2e3e5; color: #6c757d; }
 .status.canceled { background: #f8d7da; color: #7a3b3b; }
 
-/* Bottom nav */
 .bottom-nav {
-  position: absolute;
+  position: fixed;
   left: 12px;
   right: 12px;
-  bottom: 12px;
-  height: 76px;
+  bottom: 20px; /* slightly higher */
+  height: 70px;
   background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98));
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding: 8px;
-  box-shadow: 0 14px 40px rgba(2,6,23,0.12);
-  z-index: 80;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.12);
+  z-index: 100;
+  transition: bottom 0.3s ease, opacity 0.3s ease;
 }
 body.dark .bottom-nav {
   background: linear-gradient(180deg, rgba(20,28,36,0.9), rgba(20,28,36,0.95));
+}
+.bottom-nav.scrolled {
+  bottom: 8px; /* closer to bottom when scrolling down */
+  opacity: 0.92;
 }
 .bottom-nav .nav-btn {
   display: flex;
